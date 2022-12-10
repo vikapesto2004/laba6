@@ -1,0 +1,20 @@
+a = input()
+s_open, ind_open = [], []
+s_close, ind_close = [], []
+
+for i in range(len(a)):
+    if a[i] == '(':
+        s_open.append(a[i]), ind_open.append(i)
+    elif a[i] == ')':
+        s_close.append(a[i]), ind_close.append(i)
+        if len(s_open) != 0 and len(s_close) != 0:
+            open, close = s_open.pop(), s_close.pop()
+            ind_open.pop(), ind_close.pop()
+
+ind_open += ind_close
+if len(ind_open) != 0:
+    n = min(ind_open)
+    print('Номер символа, нарушевшего правильность расстановки:', n + 1)
+else:
+    print('Последовательность верна')
+
