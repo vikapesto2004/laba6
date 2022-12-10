@@ -8,7 +8,7 @@ for i in range(len(a)):
     elif a[i] == ')':
         s_close.append(a[i]), ind_close.append(i)
         if len(s_open) != 0 and len(s_close) != 0:
-            open, close = s_open.pop(), s_close.pop()
+            s_open.pop(), s_close.pop()
             ind_open.pop(), ind_close.pop()
 
 ind_open += ind_close
