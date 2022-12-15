@@ -1,0 +1,24 @@
+# поиск в глубину
+graph = {0: [1, 2, 3], 1: [0, 2], 2: [0, 1, 4], 3: [0], 4: [2]}
+visited = []
+stack = []
+
+
+def DFS(start):
+    if start not in visited:
+        visited.append(start)
+    for i in graph[start][::-1]:
+        if i not in visited and i not in stack:
+            stack.insert(0, i)
+    if len(stack) == 0:
+        return
+    new_start = stack.pop(0)
+    DFS(new_start)
+
+
+node = int(input('Введите начальную вершину: '))
+while node not in graph.keys():
+    node = int(input('Введите начальную вершину повторно: '))
+
+DFS(node)
+print('Порядок посещения вершин: ', *visited)
