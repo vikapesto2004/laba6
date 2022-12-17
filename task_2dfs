@@ -1,24 +1,24 @@
 # поиск в глубину
-graph = {0: [1, 2, 3], 1: [0, 2], 2: [0, 1, 4], 3: [0], 4: [2]}
-visited = []
-stack = []
+graph = [[1, 2], [4], [3], [4], [3, 5], [6], [7], [3, 9], [3], []]
+visited = [0] * 10
+able_to_visit = []
 
 
-def DFS(start):
-    if start not in visited:
-        visited.append(start)
-    for i in graph[start][::-1]:
-        if i not in visited and i not in stack:
-            stack.insert(0, i)
-    if len(stack) == 0:
-        return
-    new_start = stack.pop(0)
-    DFS(new_start)
+def DFS(node):
+    if not visited[node]:
+        visited[node] = 1
+    for i in graph[node]:
+        if not visited[i]:
+            DFS(i)
 
 
-node = int(input('Введите начальную вершину: '))
-while node not in graph.keys():
-    node = int(input('Введите начальную вершину повторно: '))
+n = int(input('Введите вершину графа: '))
+DFS(n)
+for i in range(10):
+    if visited[i] and not i == n:
+        able_to_visit.append(i)
+if len(able_to_visit):
+    print('Из вершины можно попасть в вершины:', *able_to_visit)
+else:
+    print('Из данной вершины нельзя никуда попасть')
 
-DFS(node)
-print('Порядок посещения вершин: ', *visited)
